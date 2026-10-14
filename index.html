@@ -82,14 +82,30 @@
 
   /* ---------- 1. annuncio ---------- */
   #annuncio{
-    position:relative;
+    /* MODIFICA QUI: la foto della prima pagina (si cambia solo in questa riga) */
+    --foto-annuncio:url('images/ciraclaudia_front.jpeg');
+    position:relative;isolation:isolate;overflow:hidden;
     justify-content:center;text-align:center;
     color:#fff;
-    /* foto orizzontale degli sposi: images/sposi.jpg */
+    background:linear-gradient(160deg, var(--cielo), var(--cielo-scuro));
+  }
+  /* sotto: la stessa foto ingrandita e sfocata, riempie i bordi liberi */
+  #annuncio::before{
+    content:'';position:absolute;inset:-40px;z-index:-2;
+    background:var(--foto-annuncio) center/cover no-repeat;
+    filter:blur(28px);
+  }
+  /* sopra: la foto intera, non tagliata, con un velo scuro leggero per leggere il testo */
+  #annuncio::after{
+    content:'';position:absolute;inset:0;z-index:-1;
     background:
-      linear-gradient(rgba(40,60,80,.28), rgba(40,60,80,.42)),
-      url('images/ciraclaudia_front.jpeg') center/cover no-repeat,
-      linear-gradient(160deg, var(--cielo), var(--cielo-scuro));
+      linear-gradient(rgba(40,60,80,.14), rgba(40,60,80,.26)),   /* velo: abbassa i numeri per schiarire */
+      var(--foto-annuncio) center/contain no-repeat;   /* contain = foto intera; cover = riempie tutto, tagliando i bordi */
+  }
+  #annuncio .data, #annuncio h1{text-shadow:0 1px 14px rgba(20,30,40,.45)}   /* tiene il testo leggibile col velo più chiaro */
+  /* su schermi verticali (telefoni) la foto intera sarebbe una striscia: lì riempie lo schermo */
+  @media(orientation:portrait){
+    #annuncio::after{background-size:auto, cover}
   }
   #annuncio .wrap{max-width:900px}
   .data{
@@ -181,28 +197,30 @@
 
   /* ---------- 5. rsvp ---------- */
   #rsvp{background:var(--grigio)}
+  /* titolo e testo sopra; sotto modulo e foto affiancati, con la stessa altezza */
+  .rsvp-head{max-width:46rem;margin-bottom:2rem}
   .rsvp-grid{
-    display:grid;grid-template-columns:2fr 1fr;   /* testo e modulo due terzi, foto un terzo */
-    gap:clamp(2rem,5vw,4.5rem);align-items:start;width:100%;
+    display:grid;grid-template-columns:3fr 2fr;   /* modulo tre quinti, foto due quinti */
+    gap:clamp(1.5rem,4vw,3rem);align-items:stretch;
   }
-  .rsvp-testo p.intro{
+  .rsvp-head p.intro{
     font-family:var(--serif);font-size:clamp(1.35rem,2.4vw,1.75rem);line-height:1.45;
     margin-bottom:1.2rem;
   }
-  .rsvp-testo .scadenza{color:var(--prato);font-weight:400;margin-bottom:2rem}
+  .rsvp-head .scadenza{color:var(--prato);font-weight:400}
   .rsvp-card{
     background:var(--perla);border-radius:14px;padding:.6rem;
   }
   .form-embed{width:100%;border:0;border-radius:9px;background:#fff;display:block}
   .form-fallback{font-size:.9rem;color:var(--muted);text-align:center;margin:.8rem 0 .3rem}
   .rsvp-foto{
-    aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--cielo-chiaro);
-    position:sticky;top:5rem;   /* la foto resta in vista mentre si compila il modulo */
+    border-radius:14px;overflow:hidden;background:var(--cielo-chiaro);
+    position:relative;   /* da desktop la foto è alta quanto il riquadro del modulo */
   }
-  .rsvp-foto img{width:100%;height:100%;object-fit:cover;display:block}
+  .rsvp-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   @media(max-width:820px){
     .rsvp-grid{grid-template-columns:1fr}
-    .rsvp-foto{aspect-ratio:4/3;position:static;order:-1}   /* da mobile la foto va sopra */
+    .rsvp-foto{aspect-ratio:4/3;order:-1}   /* da mobile la foto va sopra il modulo */
   }
 
   /* ---------- 6. finale: foto a tutta pagina con le fedi ---------- */
@@ -301,14 +319,16 @@
 
 <!-- ===================== 3. RSVP ===================== -->
 <section id="rsvp">
-  <div class="wrap rsvp-grid">
-    <div class="rsvp-testo reveal">
+  <div class="wrap">
+    <div class="rsvp-head reveal">
       <p class="eyebrow">RSVP</p>
       <h2>Ci sarai?</h2>
       <p class="intro">Per organizzare al meglio la giornata, faccelo sapere compilando un breve modulo.</p>
       <!-- MODIFICA QUI: data entro cui confermare -->
       <p class="scadenza">Ti chiediamo di rispondere entro il 1° marzo 2027.</p>
-      <div class="rsvp-card">
+    </div>
+    <div class="rsvp-grid">
+      <div class="rsvp-card reveal">
         <!--
           MODIFICA QUI: incolla il link "incorpora" del Google Form dentro src="..."
           (nel Form: Invia → icona < > → copia solo l'indirizzo che sta dentro src="...").
@@ -318,10 +338,10 @@
         <!-- MODIFICA QUI: link normale dello stesso Form, per chi non vede il modulo -->
         <p class="form-fallback">Il modulo non si vede? <a href="https://forms.gle/8P5pbUQCZbUT6WE57" target="_blank" rel="noopener">Aprilo in una nuova pagina</a>.</p>
       </div>
-    </div>
-    <div class="rsvp-foto reveal">
-      <!-- foto: images/rsvp.jpg (verticale) -->
-      <img src="images/ciraclaudia_amaro_vertical.jpeg" alt="Federico e Claudia">
+      <div class="rsvp-foto reveal">
+        <!-- foto verticale -->
+        <img src="images/ciraclaudia_amaro_vertical.jpeg" alt="Federico e Claudia">
+      </div>
     </div>
   </div>
 </section>
