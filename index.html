@@ -112,6 +112,12 @@
   .luogo h3{font-family:var(--serif);font-weight:500;font-size:1.7rem;line-height:1.25;margin-bottom:.5rem}
   .luogo .tipo{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--prato);margin-bottom:.6rem;font-weight:400}
   .luogo address{font-style:normal;color:var(--muted);margin-bottom:1.3rem}
+  /* nota pratica sotto l'indirizzo (es. ZTL e parcheggio) */
+  .nota{
+    font-size:.92rem;line-height:1.55;color:var(--ink);
+    border-left:2px solid var(--prato);padding-left:.9rem;
+    margin:-.4rem 0 1.4rem;max-width:30rem;
+  }
   .mappa{
     background:var(--grigio);padding:.6rem;border-radius:14px;
   }
@@ -194,6 +200,28 @@
     .rsvp-foto{aspect-ratio:4/3;position:static;order:-1}   /* da mobile la foto va sopra */
   }
 
+  /* ---------- 6. finale: foto a tutta pagina con le fedi ---------- */
+  #finale{
+    position:relative;
+    padding:0;
+    /* foto: images/finale.jpg (orizzontale) */
+    background:
+      linear-gradient(rgba(30,40,50,.18), rgba(30,40,50,.30)),
+      url('images/finale.jpg') center/cover no-repeat,
+      linear-gradient(160deg, var(--cielo), var(--cielo-scuro));
+  }
+  /* fedi in sovraimpressione: centrate in orizzontale, a 4/5 dell'altezza della pagina */
+  .fedi-finale{
+    position:absolute;left:50%;
+    top:80%;   /* posizione verticale: 50% = al centro, 80% = a quattro quinti */
+    transform:translate(-50%,-50%);
+  }
+  #finale svg{
+    display:block;
+    width:clamp(120px,18vw,200px);height:auto;
+    filter:drop-shadow(0 2px 10px rgba(0,0,0,.35));   /* stacca le fedi dalla foto */
+  }
+
   footer{
     text-align:center;padding:2.5rem 1rem 3rem;
     font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--muted);
@@ -240,8 +268,9 @@
       <div class="luogo reveal">
         <div>
           <p class="tipo">La cerimonia</p>
-          <h3>Duomo di Atri, 11:00</h3> <h3>Consigliamo di arrivare prima, il Duomo è in ZTL!</h3>
+          <h3>Duomo di Atri, ore 11</h3>
           <address>Piazza Duomo 2, Atri (TE)</address>
+          <p class="nota">Il Duomo si trova in zona a traffico limitato: ti consigliamo di arrivare con un po&rsquo; di anticipo per trovare parcheggio fuori dal centro.</p>
           <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&destination=Duomo+di+Atri,+Piazza+Duomo+2,+64032+Atri+TE" target="_blank" rel="noopener">Indicazioni</a>
         </div>
         <div class="mappa">
@@ -332,18 +361,49 @@
     <div class="upload-card reveal">
       <div class="icona">
         <!-- due fedi intrecciate -->
-        <svg viewBox="0 0 64 56" width="76" height="66" aria-hidden="true" fill="none" stroke-linecap="round">
-          <circle cx="24" cy="31" r="16" stroke="#C9A24A" stroke-width="3.5"/>
-          <circle cx="40" cy="31" r="16" stroke="#C9A24A" stroke-width="3.5"/>
-          <!-- incrocio superiore: la prima fede passa sopra la seconda -->
-          <path d="M27.33 15.35 A16 16 0 0 1 35.89 20.29" stroke="#fff" stroke-width="7.5" stroke-linecap="butt"/>
-          <path d="M26.78 15.24 A16 16 0 0 1 36.26 20.72" stroke="#C9A24A" stroke-width="3.5" stroke-linecap="butt"/>
+        <!-- stesso disegno della pagina finale; le maschere hanno nomi diversi perché nella pagina non possono ripetersi -->
+        <svg viewBox="0 0 64 56" width="76" height="66" aria-hidden="true" fill="none">
+          <defs>
+            <mask id="foto-sotto-in-alto" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="56">
+              <rect width="64" height="56" fill="#fff"/>
+              <circle cx="32" cy="17.14" r="4" fill="#000"/>
+            </mask>
+            <mask id="foto-sotto-in-basso" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="56">
+              <rect width="64" height="56" fill="#fff"/>
+              <circle cx="32" cy="44.86" r="4" fill="#000"/>
+            </mask>
+          </defs>
+          <circle cx="24" cy="31" r="16" stroke="#C9A24A" stroke-width="3.5" mask="url(#foto-sotto-in-basso)"/>
+          <circle cx="40" cy="31" r="16" stroke="#C9A24A" stroke-width="3.5" mask="url(#foto-sotto-in-alto)"/>
         </svg>
       </div>
       <!-- MODIFICA QUI: incolla il link della cartella di caricamento -->
       <a class="btn" href="#" target="_blank" rel="noopener">Carica le tue foto</a>
       <small>Si possono caricare più foto e video insieme, anche dal telefono.</small>
     </div>
+  </div>
+</section>
+
+<!-- ===================== 6. FINALE ===================== -->
+<section id="finale" aria-label="Claudia e Federico">
+  <!-- due fedi intrecciate, versione per foto: l'incrocio è fatto con maschere, senza stacchi bianchi -->
+  <div class="fedi-finale">
+  <svg class="reveal" viewBox="0 0 64 56" aria-hidden="true" fill="none">
+    <defs>
+      <!-- nasconde la fede destra dove la sinistra le passa sopra (incrocio in alto) -->
+      <mask id="sotto-in-alto" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="56">
+        <rect width="64" height="56" fill="#fff"/>
+        <circle cx="32" cy="17.14" r="4" fill="#000"/>
+      </mask>
+      <!-- nasconde la fede sinistra dove la destra le passa sopra (incrocio in basso) -->
+      <mask id="sotto-in-basso" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="56">
+        <rect width="64" height="56" fill="#fff"/>
+        <circle cx="32" cy="44.86" r="4" fill="#000"/>
+      </mask>
+    </defs>
+    <circle cx="24" cy="31" r="16" stroke="#C9A24A" stroke-width="3.5" mask="url(#sotto-in-basso)"/>
+    <circle cx="40" cy="31" r="16" stroke="#C9A24A" stroke-width="3.5" mask="url(#sotto-in-alto)"/>
+  </svg>
   </div>
 </section>
 
