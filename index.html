@@ -88,7 +88,7 @@
   /* ---------- 1. annuncio ---------- */
   #annuncio{
     /* MODIFICA QUI: la foto della prima pagina (si cambia solo in questa riga) */
-    --foto-annuncio:url('images/ciraclaudia_front.jpeg');
+    --foto-annuncio:url('images/ciraclaudia_end.jpeg');
     position:relative;isolation:isolate;overflow:hidden;
     justify-content:center;text-align:center;
     color:#fff;
@@ -100,17 +100,19 @@
     background:var(--foto-annuncio) center/cover no-repeat;
     filter:blur(28px);
   }
-  /* sopra: la foto intera, non tagliata, con un velo scuro leggero per leggere il testo */
+  /* sopra: la foto, con un velo scuro leggero per leggere il testo */
   #annuncio::after{
     content:'';position:absolute;inset:0;z-index:-1;
     background:
       linear-gradient(rgba(40,60,80,.14), rgba(40,60,80,.26)),   /* velo: abbassa i numeri per schiarire */
-      var(--foto-annuncio) center/contain no-repeat;   /* contain = foto intera; cover = riempie tutto, tagliando i bordi */
+      var(--foto-annuncio) center/cover no-repeat;   /* desktop: la foto riempie tutto lo schermo */
   }
   #annuncio .data, #annuncio h1{text-shadow:0 1px 14px rgba(20,30,40,.45)}   /* tiene il testo leggibile col velo più chiaro */
-  /* su schermi verticali (telefoni) la foto intera sarebbe una striscia: lì riempie lo schermo */
+  /* telefoni: foto meno ingrandita, i bordi sopra e sotto si riempiono con lo sfocato.
+     Il numero è l'altezza della foto rispetto allo schermo: più è basso, meno la foto è zoomata
+     (100% = come su desktop, tutta tagliata ai lati) */
   @media(orientation:portrait){
-    #annuncio::after{background-size:auto, cover}
+    #annuncio::after{background-size:auto, auto 65%}
   }
   #annuncio .wrap{max-width:900px}
   .data{
@@ -232,10 +234,10 @@
   #finale{
     position:relative;
     padding:0;
-    /* foto: images/finale.jpg (orizzontale) */
+    /* foto dell'ultima pagina (orizzontale) */
     background:
       linear-gradient(rgba(30,40,50,.18), rgba(30,40,50,.30)),
-      url('images/ciraclaudia_end.jpeg') center/cover no-repeat,
+      url('images/ciraclaudia_front.jpeg') center/cover no-repeat,
       linear-gradient(160deg, var(--cielo), var(--cielo-scuro));
   }
   /* fedi in sovraimpressione: centrate in orizzontale, a 4/5 dell'altezza della pagina */
