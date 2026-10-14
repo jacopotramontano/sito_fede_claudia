@@ -109,6 +109,11 @@
     gap:clamp(2.5rem,5vw,4rem);margin-top:1rem;
   }
   .luogo{display:flex;flex-direction:column;gap:1.4rem}
+  /* la parte di testo occupa lo stesso spazio in entrambe le colonne
+     e il bottone scende in fondo: così bottoni e mappe restano allineati
+     anche se una colonna ha la nota e l'altra no */
+  .luogo-testo{flex:1;display:flex;flex-direction:column}
+  .luogo-testo .btn{margin-top:auto;align-self:flex-start}
   .luogo h3{font-family:var(--serif);font-weight:500;font-size:1.7rem;line-height:1.25;margin-bottom:.5rem}
   .luogo .tipo{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--prato);margin-bottom:.6rem;font-weight:400}
   .luogo address{font-style:normal;color:var(--muted);margin-bottom:1.3rem}
@@ -266,7 +271,7 @@
     <div class="luoghi">
 
       <div class="luogo reveal">
-        <div>
+        <div class="luogo-testo">
           <p class="tipo">La cerimonia</p>
           <h3>Duomo di Atri, ore 11</h3>
           <address>Piazza Duomo 2, Atri (TE)</address>
@@ -279,7 +284,7 @@
       </div>
 
       <div class="luogo reveal">
-        <div>
+        <div class="luogo-testo">
           <p class="tipo">Il ricevimento</p>
           <h3>Borgo Fonte Scura</h3>
           <address>Contrada Valle Scura 11C, Silvi (TE)</address>
