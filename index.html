@@ -17,6 +17,7 @@
     --cielo-scuro:#4170BA;  /* azzurro intenso, parte alta del cielo: testi e bottoni */
     --cielo-chiaro:#E8F1FB; /* velatura di cielo per gli sfondi */
     --perla:#F6F9FC;        /* bianco nuvola, sfondo principale */
+    --bianco-perla:#F5F0E6; /* bianco perla caldo: testo sopra le foto */
     --prato:#5E6A3E;        /* verde prato della foto: dettagli e accenti */
     --grigio:#E9ECE0;       /* inserti: prato schiarito quasi a bianco */
     --ink:#26313D;          /* testo */
@@ -94,30 +95,21 @@
     /* posizione delle due scritte: la data in alto (top), il nome in basso (bottom).
        Per la data: più è alto il numero, più scende. Per il nome: più è alto il numero, più sale. */
     --pos-data:40%;
-    --pos-nome:16vh;
-    color:#fff;
+    --pos-nome:9vh;
+    color:var(--bianco-perla);
     background:linear-gradient(160deg, var(--cielo), var(--cielo-scuro));
   }
-  /* sotto: la stessa foto ingrandita e sfocata, riempie i bordi liberi */
-  #annuncio::before{
-    content:'';position:absolute;inset:-40px;z-index:-2;
-    background:var(--foto-annuncio) center/cover no-repeat;
-    filter:blur(28px);
-  }
-  /* sopra: la foto, con un velo scuro leggero per leggere il testo */
+  /* la foto riempie tutto lo schermo, con un velo scuro leggero per leggere il testo */
   #annuncio::after{
     content:'';position:absolute;inset:0;z-index:-1;
     background:
       linear-gradient(rgba(40,60,80,.14), rgba(40,60,80,.26)),   /* velo: abbassa i numeri per schiarire */
-      var(--foto-annuncio) center/cover no-repeat;   /* desktop: la foto riempie tutto lo schermo */
+      var(--foto-annuncio) center/cover no-repeat;
   }
   #annuncio .data, #annuncio h1{text-shadow:0 1px 14px rgba(20,30,40,.45)}   /* tiene il testo leggibile col velo più chiaro */
-  /* telefoni: foto meno ingrandita, i bordi sopra e sotto si riempiono con lo sfocato.
-     Il numero è l'altezza della foto rispetto allo schermo: più è basso, meno la foto è zoomata
-     (100% = come su desktop, tutta tagliata ai lati) */
+  /* da telefono il nome sta un filo più su, per non finire sotto la barra del browser */
   @media(orientation:portrait){
-    #annuncio::after{background-size:auto, auto 65%}
-    #annuncio{--pos-nome:24vh}   /* da telefono il nome resta sulla foto, sopra la fascia sfocata */
+    #annuncio{--pos-nome:12vh}
   }
   #annuncio .wrap{max-width:900px}
   .data{
@@ -131,7 +123,7 @@
   #annuncio h1{bottom:var(--pos-nome)}
   #annuncio h1{
     font-family:var(--serif);font-weight:400;
-    font-size:clamp(2.2rem,5.8vw,4.5rem);line-height:1.12;   /* min (telefono), crescita, max (desktop) */
+    font-size:clamp(2rem,5.2vw,4rem);line-height:1.12;   /* min (telefono), crescita, max (desktop) */
   }
   #annuncio h1 em{font-style:italic}
 
