@@ -51,8 +51,13 @@
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--grigio);
   }
+  nav{align-items:center}
   nav a{color:var(--ink);text-decoration:none;font-weight:400}
   nav a:hover{color:var(--cielo-scuro)}
+  /* icona delle fedi al posto della voce "Annuncio" */
+  .nav-fedi{display:flex;line-height:0}
+  .nav-fedi svg{width:28px;height:auto;transition:transform .25s}
+  .nav-fedi:hover svg{transform:scale(1.08)}
 
   /* ---------- sezioni a tutta pagina ---------- */
   section{min-height:100vh;display:flex;align-items:center;padding:6rem 0 4rem}
@@ -266,7 +271,23 @@
 <body>
 
 <nav>
-  <a href="#annuncio">Annuncio</a>
+  <!-- le due fedi riportano all'inizio; anche qui le maschere hanno nomi propri -->
+  <a href="#annuncio" class="nav-fedi" aria-label="Torna all'inizio">
+    <svg viewBox="0 0 64 56" aria-hidden="true" fill="none">
+      <defs>
+        <mask id="nav-sotto-in-alto" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="56">
+          <rect width="64" height="56" fill="#fff"/>
+          <circle cx="32" cy="17.14" r="4" fill="#000"/>
+        </mask>
+        <mask id="nav-sotto-in-basso" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="56">
+          <rect width="64" height="56" fill="#fff"/>
+          <circle cx="32" cy="44.86" r="4" fill="#000"/>
+        </mask>
+      </defs>
+      <circle cx="24" cy="31" r="16" stroke="#C9A24A" stroke-width="4" mask="url(#nav-sotto-in-basso)"/>
+      <circle cx="40" cy="31" r="16" stroke="#C9A24A" stroke-width="4" mask="url(#nav-sotto-in-alto)"/>
+    </svg>
+  </a>
   <a href="#dove">Dove</a>
   <a href="#rsvp">RSVP</a>
   <a href="#regalo">Regalo</a>
