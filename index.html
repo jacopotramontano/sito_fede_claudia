@@ -91,6 +91,10 @@
     --foto-annuncio:url('images/ciraclaudia_end.jpeg');
     position:relative;isolation:isolate;overflow:hidden;
     justify-content:center;text-align:center;
+    /* posizione delle due scritte: la data in alto (top), il nome in basso (bottom).
+       Per la data: più è alto il numero, più scende. Per il nome: più è alto il numero, più sale. */
+    --pos-data:40%;
+    --pos-nome:16vh;
     color:#fff;
     background:linear-gradient(160deg, var(--cielo), var(--cielo-scuro));
   }
@@ -113,14 +117,21 @@
      (100% = come su desktop, tutta tagliata ai lati) */
   @media(orientation:portrait){
     #annuncio::after{background-size:auto, auto 65%}
+    #annuncio{--pos-nome:24vh}   /* da telefono il nome resta sulla foto, sopra la fascia sfocata */
   }
   #annuncio .wrap{max-width:900px}
   .data{
-    font-size:.85rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.8rem;
+    font-size:.85rem;letter-spacing:.3em;text-transform:uppercase;
   }
+  /* le due scritte sono posizionate in modo indipendente */
+  #annuncio .data, #annuncio h1{
+    position:absolute;left:0;right:0;padding:0 clamp(1.25rem,4vw,3rem);
+  }
+  #annuncio .data{top:var(--pos-data)}
+  #annuncio h1{bottom:var(--pos-nome)}
   #annuncio h1{
     font-family:var(--serif);font-weight:400;
-    font-size:clamp(2.4rem,6.5vw,5rem);line-height:1.12;
+    font-size:clamp(2.2rem,5.8vw,4.5rem);line-height:1.12;   /* min (telefono), crescita, max (desktop) */
   }
   #annuncio h1 em{font-style:italic}
 
