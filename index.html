@@ -233,7 +233,7 @@
 <!-- ===================== 2. DOVE ===================== -->
 <section id="dove">
   <div class="wrap">
-    <p class="eyebrow reveal">Dove</p>
+    <p class="eyebrow reveal">Dove e quando</p>
     <h2 class="reveal">Vieni a festeggiare con noi!</h2>
     <div class="luoghi">
 
@@ -265,7 +265,34 @@
   </div>
 </section>
 
-<!-- ===================== 3. REGALO ===================== -->
+<!-- ===================== 3. RSVP ===================== -->
+<section id="rsvp">
+  <div class="wrap rsvp-grid">
+    <div class="rsvp-testo reveal">
+      <p class="eyebrow">RSVP</p>
+      <h2>Ci sarai?</h2>
+      <p class="intro">Per organizzare al meglio la giornata, faccelo sapere compilando un breve modulo.</p>
+      <!-- MODIFICA QUI: data entro cui confermare -->
+      <p class="scadenza">Ti chiediamo di rispondere entro il 1° marzo 2027.</p>
+      <div class="rsvp-card">
+        <!--
+          MODIFICA QUI: incolla il link "incorpora" del Google Form dentro src="..."
+          (nel Form: Invia → icona < > → copia solo l'indirizzo che sta dentro src="...").
+          Se il modulo risulta tagliato o con troppo spazio vuoto, regola height qui sotto.
+        --> 
+        <iframe class="form-embed" src="https://docs.google.com/forms/d/e/1FAIpQLSdvcmgeKZj9_M3tbcVuSLMX1EvCE18x_JJ2CjhxFaSoQ6IjaA/viewform?embedded=true" height="620" loading="lazy" title="Modulo RSVP">Caricamento…</iframe>
+        <!-- MODIFICA QUI: link normale dello stesso Form, per chi non vede il modulo -->
+        <p class="form-fallback">Il modulo non si vede? <a href="https://forms.gle/8P5pbUQCZbUT6WE57" target="_blank" rel="noopener">Aprilo in una nuova pagina</a>.</p>
+      </div>
+    </div>
+    <div class="rsvp-foto reveal">
+      <!-- foto: images/rsvp.jpg (verticale) -->
+      <img src="images/rsvp.jpg" alt="Federico e Claudia">
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 4. REGALO ===================== -->
 <section id="regalo">
   <div class="wrap regalo-grid">
     <div class="regalo-foto reveal">
@@ -296,7 +323,7 @@
   </div>
 </section>
 
-<!-- ===================== 4. FOTO ===================== -->
+<!-- ===================== 5. FOTO ===================== -->
 <section id="foto">
   <div class="wrap">
     <p class="eyebrow reveal">Ricordi</p>
@@ -316,33 +343,6 @@
       <!-- MODIFICA QUI: incolla il link della cartella di caricamento -->
       <a class="btn" href="#" target="_blank" rel="noopener">Carica le tue foto</a>
       <small>Si possono caricare più foto e video insieme, anche dal telefono.</small>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== 5. RSVP ===================== -->
-<section id="rsvp">
-  <div class="wrap rsvp-grid">
-    <div class="rsvp-testo reveal">
-      <p class="eyebrow">RSVP</p>
-      <h2>Ci sarai?</h2>
-      <p class="intro">Per organizzare al meglio la giornata, faccelo sapere compilando un breve modulo.</p>
-      <!-- MODIFICA QUI: data entro cui confermare -->
-      <p class="scadenza">Ti chiediamo di rispondere entro il 1° marzo 2027.</p>
-      <div class="rsvp-card">
-        <!--
-          MODIFICA QUI: incolla il link "incorpora" del Google Form dentro src="..."
-          (nel Form: Invia → icona < > → copia solo l'indirizzo che sta dentro src="...").
-          Se il modulo risulta tagliato o con troppo spazio vuoto, regola height qui sotto.
-        --> 
-        <iframe class="form-embed" src="https://docs.google.com/forms/d/e/1FAIpQLSdvcmgeKZj9_M3tbcVuSLMX1EvCE18x_JJ2CjhxFaSoQ6IjaA/viewform?embedded=true" height="620" loading="lazy" title="Modulo RSVP">Caricamento…</iframe>
-        <!-- MODIFICA QUI: link normale dello stesso Form, per chi non vede il modulo -->
-        <p class="form-fallback">Il modulo non si vede? <a href="#" target="_blank" rel="noopener">Aprilo in una nuova pagina</a>.</p>
-      </div>
-    </div>
-    <div class="rsvp-foto reveal">
-      <!-- foto: images/rsvp.jpg (verticale) -->
-      <img src="images/rsvp.jpg" alt="Federico e Claudia">
     </div>
   </div>
 </section>
